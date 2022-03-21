@@ -1,3 +1,7 @@
+import os
+import wave
+import struct
+
 def Interpolate(x0,x1,x2,x3,t): #InterpolateHermite4pt3oX
     c0 = x1
     c1 = 0.5 * (x2 - x0)
@@ -55,7 +59,6 @@ def ReadWave(wav):
             else:
                 audior[int(i/2)] = struct.unpack('<i',file[counter:counter+sdep]+b'\x00'*sdpt)[0]
         counter += sdep
-    print(min(audiol),min(audior))
     return audiol, audior
 
 def ConcatBinary(file,bitd): #mono byte-like
@@ -81,7 +84,7 @@ def WriteWave(wav,header,al): #stereo byte-like
     wavf.close()
 
 def InterpolatorAL0(audio,y,z): #mono int
-    newaudio = [0]*len(audio)*y
+    newaudio = [0]*len(audio)
     counter = 0
     for i in range(len(audio)):
         for j in range(y):
@@ -152,18 +155,15 @@ y = int(input("Upscale factor: "))
 
 alg = int(input("Algorithm (0,1,2,3): "))
 
-z = 1/y
-
 audio = ReadWave(wav)
-
-print("Max Left: "+str(max(audio[0]))+" Max Right: "+str(max(audio[1])))
-print("Min Left: "+str(min(audio[0]))+" Min Right: "+str(min(audio[1])))
 
 header = wav.getparams()
 
 wav.close()
 
 header = header[0],header[1],header[2]*y,header[3]*y,header[4],header[5]
+
+z = 1/y
 
 if(alg == 0):
     audiol = InterpolatorAL0(audio[0],y,z)

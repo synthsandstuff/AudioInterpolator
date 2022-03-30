@@ -84,7 +84,7 @@ def WriteWave(wav,header,al): #stereo byte-like
     wavf.close()
 
 def InterpolatorAL0(audio,y,z): #mono int
-    newaudio = [0]*len(audio)
+    newaudio = [0]*(len(audio)*y)
     counter = 0
     for i in range(len(audio)):
         for j in range(y):

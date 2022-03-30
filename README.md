@@ -1,1 +1,1 @@
-"# WaveIntepolation" 
+Basic audio Interpolator script

@@ -88,7 +88,7 @@ def InterpolatorAL0(audio,y,z): #mono int
     counter = 0
     for i in range(len(audio)):
         for j in range(y):
-            newaudio[counter] = audio[i]*5.427
+            newaudio[counter] = audio[i]
             counter += 1
     return newaudio
 
@@ -115,6 +115,7 @@ def InterpolatorAL2(audio,y,z): #mono int
 def InterpolatorAL3(audio,y,z):
     newaudio = [0]*len(audio)*y
     counter = 0
+    y = y // 5 + (y % 5 > 0)
     for i in range(len(audio)):
         indx = Indexer(i,audio)
         for j in range(y):

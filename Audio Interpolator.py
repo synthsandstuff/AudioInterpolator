@@ -31,7 +31,7 @@ def Indexer(k,wave): #Function to find the samples to feed the interpolation alg
         indx[2] = wave[k+1]
     except:
         indx[2] = 0
-    try: #Sam as above except for the last sample.
+    try: #Same as above except for the last sample.
         indx[3] = wave[k+2]
     except:
         indx[3] = 0
